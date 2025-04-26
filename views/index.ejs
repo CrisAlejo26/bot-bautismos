@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    /* Estilos adicionales para asegurar responsividad */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .hero-section {
+      background-color: #f8f9fa;
+      padding: 3rem 0;
+      margin-bottom: 2rem;
+    }
+    .feature-card {
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+      height: 100%;
+      transition: transform 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+    .bot-info {
+      background-color: #e9ecef;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .qr-code-container {
+      max-width: 200px;
+      margin: 0 auto;
+    }
+    /* Media queries para asegurar responsividad */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 2rem 0;
+      }
+      .qr-code-container {
+        max-width: 150px;
+      }
+    }
+    @media (max-width: 576px) {
+      .hero-section h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="/">Bot de Bautismos</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#comandos">Comandos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contacto">Contacto</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container text-center">
+      <h1>Bot de Bautismos para Telegram</h1>
+      <p class="lead">Una herramienta sencilla para gestionar información sobre bautismos</p>
+      <div class="mt-4">
+        <a href="https://t.me/Bautismosbot" class="btn btn-primary btn-lg">Abrir en Telegram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <!-- Bot Info -->
+        <div class="bot-info">
+          <h2>¿Qué es el Bot de Bautismos?</h2>
+          <p>
+            El Bot de Bautismos es una herramienta diseñada para facilitar información y gestionar consultas relacionadas con el sacramento del bautismo. 
+            A través de este bot, podrás obtener información sobre requisitos, fechas disponibles y contacto directo con la parroquia.
+          </p>
+        </div>
+
+        <!-- Features Section -->
+        <h2 class="mb-4">Características</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card feature-card">
+              <div class="card-body">
+                <h5 class="card-title">Información Completa</h5>
+                <p class="card-text">Accede a toda la información necesaria sobre el sacramento del bautismo.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card feature-card">
+              <div class="card-body">
+                <h5 class="card-title">Consulta de Fechas</h5>
+                <p class="card-text">Conoce las próximas fechas disponibles para celebrar bautismos.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card feature-card">
+              <div class="card-body">
+                <h5 class="card-title">Requisitos Detallados</h5>
+                <p class="card-text">Lista completa de requisitos para el sacramento del bautismo.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card feature-card">
+              <div class="card-body">
+                <h5 class="card-title">Contacto Directo</h5>
+                <p class="card-text">Información de contacto para resolver dudas adicionales.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Commands Section -->
+        <h2 class="mt-5 mb-4" id="comandos">Comandos Disponibles</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Comando</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>/start</code></td>
+                <td>Iniciar el bot y recibir mensaje de bienvenida</td>
+              </tr>
+              <tr>
+                <td><code>/ayuda</code></td>
+                <td>Ver lista de comandos disponibles</td>
+              </tr>
+              <tr>
+                <td><code>/info</code></td>
+                <td>Información general sobre el bautismo</td>
+              </tr>
+              <tr>
+                <td><code>/requisitos</code></td>
+                <td>Lista de requisitos para el bautismo</td>
+              </tr>
+              <tr>
+                <td><code>/fecha</code></td>
+                <td>Consultar próximas fechas disponibles</td>
+              </tr>
+              <tr>
+                <td><code>/contacto</code></td>
+                <td>Obtener información de contacto</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5 class="mb-0">Escanea para comenzar</h5>
+          </div>
+          <div class="card-body text-center">
+            <div class="qr-code-container mb-3">
+              <!-- QR que apunta al bot -->
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://t.me/Bautismosbot" alt="QR Code" class="img-fluid">
+            </div>
+            <p>O haz clic en el botón para abrir Telegram</p>
+            <a href="https://t.me/Bautismosbot" class="btn btn-primary">Abrir Bot</a>
+          </div>
+        </div>
+
+        <div class="card" id="contacto">
+          <div class="card-header">
+            <h5 class="mb-0">Contacto</h5>
+          </div>
+          <div class="card-body">
+            <p><strong>Parroquia:</strong> Nombre de la Parroquia</p>
+            <p><strong>Dirección:</strong> Calle Ejemplo, 123, Ciudad</p>
+            <p><strong>Teléfono:</strong> +34 XXX XXX XXX</p>
+            <p><strong>Email:</strong> parroquia@ejemplo.com</p>
+            <p><strong>Horario:</strong> Lunes a Viernes de 9:00 a 13:00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white mt-5 py-4">
+    <div class="container text-center">
+      <p>© <%= new Date().getFullYear() %> Bot de Bautismos. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

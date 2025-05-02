@@ -3,6 +3,7 @@ const router = express.Router();
 const bot = require('../bot');
 const fs = require('fs');
 const path = require('path');
+const { addVisitorLog, getAllVisitorLogs } = require('../src/services/visitorLogs');
 
 // Endpoint para recibir datos de personas perdidas y enviarlos al chat de Telegram
 router.post('/persona-perdida', async (req, res) => {
@@ -164,6 +165,79 @@ router.post('/persona-perdida', async (req, res) => {
       success: false, 
       message: 'Error al procesar la solicitud.', 
       error: error.message 
+    });
+  }
+});
+
+// Endpoint para registrar un nuevo visitante
+router.post('/log-visitor', async (req, res) => {
+  try {
+    const {
+      ip,
+      country,
+      region,
+      city,
+      timezone,
+      userAgent,
+      referrer,
+      timestamp,
+      path
+    } = req.body;
+
+    // Crear objeto de log
+    const visitorLog = {
+      ip: ip || req.ip || req.headers['x-forwarded-for'] || 'Desconocida',
+      country: country || 'Desconocido',
+      region: region || 'Desconocido',
+      city: city || 'Desconocido',
+      timezone: timezone || 'Desconocido',
+      userAgent: userAgent || req.headers['user-agent'] || 'Desconocido',
+      referrer: referrer || req.headers.referer || 'direct',
+      timestamp: timestamp || new Date().toISOString(),
+      path: path || req.headers.referer || '/',
+      serverTimestamp: new Date().toISOString()
+    };
+
+    // Guardar log
+    const success = addVisitorLog(visitorLog);
+
+    if (success) {
+      res.status(200).json({
+        success: true,
+        message: 'Log de visitante registrado correctamente'
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: 'Error al registrar log de visitante'
+      });
+    }
+  } catch (error) {
+    console.error('Error al registrar log de visitante:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error al procesar la solicitud',
+      error: error.message
+    });
+  }
+});
+
+// Endpoint para obtener todos los logs de visitantes
+router.get('/log-visitor', async (req, res) => {
+  try {
+    // Obtener todos los logs
+    const logs = getAllVisitorLogs();
+
+    res.status(200).json({
+      success: true,
+      logs: logs
+    });
+  } catch (error) {
+    console.error('Error al obtener logs de visitantes:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error al procesar la solicitud',
+      error: error.message
     });
   }
 });

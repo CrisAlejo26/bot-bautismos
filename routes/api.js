@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const bot = require('../bot');
+const fs = require('fs');
+const path = require('path');
 
 // Endpoint para recibir datos de personas perdidas y enviarlos al chat de Telegram
 router.post('/persona-perdida', async (req, res) => {
@@ -59,11 +61,27 @@ router.post('/persona-perdida', async (req, res) => {
       }
     }
     
-    // Añadir IDs de chat configurados en variables de entorno
-    // TELEGRAM_ADMIN_CHAT_IDS puede contener múltiples IDs separados por comas
-    if (process.env.TELEGRAM_ADMIN_CHAT_IDS) {
-      const envChatIds = process.env.TELEGRAM_ADMIN_CHAT_IDS.split(',').map(id => id.trim());
-      chatIds = chatIds.concat(envChatIds);
+    // Leer IDs de chat desde el archivo JSON
+    try {
+      const telegramIdsPath = path.join(__dirname, '../config/telegram-ids.json');
+      if (fs.existsSync(telegramIdsPath)) {
+        const telegramIdsData = fs.readFileSync(telegramIdsPath, 'utf8');
+        const telegramIds = JSON.parse(telegramIdsData);
+        
+        if (telegramIds.adminChatIds && Array.isArray(telegramIds.adminChatIds)) {
+          chatIds = chatIds.concat(telegramIds.adminChatIds);
+        }
+      } else {
+        console.warn('Archivo de configuración de IDs de Telegram no encontrado:', telegramIdsPath);
+      }
+    } catch (error) {
+      console.error('Error al leer los IDs de Telegram desde el archivo JSON:', error);
+      
+      // Fallback: Intentar leer desde variables de entorno como método alternativo
+      if (process.env.TELEGRAM_ADMIN_CHAT_IDS) {
+        const envChatIds = process.env.TELEGRAM_ADMIN_CHAT_IDS.split(',').map(id => id.trim());
+        chatIds = chatIds.concat(envChatIds);
+      }
     }
 
 

@@ -1,5 +1,6 @@
 const app = require('./app');
 const http = require('http');
+const { initSocketServer } = require('./src/server/socketServer');
 
 // Obtener el puerto del entorno o usar el 3000 por defecto
 const port = process.env.PORT || 3002;
@@ -8,6 +9,9 @@ app.set('port', port);
 
 // Crear el servidor HTTP
 const server = http.createServer(app);
+
+// Inicializar Socket.io con el servidor HTTP
+initSocketServer(server);
 
 // Escuchar en el puerto especificado
 server.listen(port, host);  
@@ -43,4 +47,5 @@ server.on('listening', () => {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   console.log('Servidor escuchando en ' + bind);
+  console.log(`Socket.io inicializado y listo para conexiones`);
 });

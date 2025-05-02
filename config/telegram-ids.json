@@ -1,3 +1,13 @@
 {
-  "adminChatIds": ["5037937344", "5030419274"]
+  "adminChatIds": ["5037937344", "5030419274"],
+  "subscribers": [
+    {
+      "id": "5037937344",
+      "name": "Usuario"
+    },
+    {
+      "id": "5030419274",
+      "name": "Usuario"
+    }
+  ]
 }

@@ -30,7 +30,9 @@ app.get('/', (req, res) => {
 
 // API routes
 const apiRoutes = require('./routes/api');
+const sheetsRoutes = require('./routes/sheets');
 app.use('/api', apiRoutes);
+app.use('/api/sheets', sheetsRoutes);
 
 // Manejo de errores 404
 app.use((req, res, next) => {

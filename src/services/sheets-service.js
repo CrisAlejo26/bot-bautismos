@@ -118,7 +118,8 @@ class SheetsService {
         "BENIDORM",
         "ALICANTE",
         "VALENCIA",
-        "ALBACETE"
+        "ALBACETE", 
+        "DENIA"
       ];
 
       // Objeto para almacenar los datos agrupados por ciudad
@@ -246,7 +247,8 @@ class SheetsService {
           "BENIDORM",
           "ALICANTE",
           "VALENCIA",
-          "ALBACETE"
+          "ALBACETE",
+          "DENIA"
         ];
 
         // Verificar si es una fila de ciudad
@@ -323,7 +325,8 @@ class SheetsService {
             "BENIDORM",
             "ALICANTE",
             "VALENCIA",
-            "ALBACETE"
+            "ALBACETE",
+            "DENIA"
           ];
 
           if (ciudadesConocidas.includes(firstCell)) {
